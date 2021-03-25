@@ -22,7 +22,7 @@ dependencies {
 ```
    JackLogger.init(BuildConfig.DEBUG);
 ```
-### Step4 use.
+### Step 4.  use
 ```
 public class MainActivity extends AppCompatActivity {
    
