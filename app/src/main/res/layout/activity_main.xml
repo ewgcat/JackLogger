@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:onClick="logV"
+        android:padding="10dp"
+        android:text="JackLogger.v"
+        android:textSize="14sp"></Button>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:onClick="logD"
+        android:padding="10dp"
+        android:text="JackLogger.d"
+        android:textSize="14sp"></Button>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:onClick="logI"
+        android:padding="10dp"
+        android:text="JackLogger.i"
+        android:textSize="14sp"></Button>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:onClick="logE"
+        android:padding="10dp"
+        android:text="JackLogger.e"
+        android:textSize="14sp"></Button>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:onClick="logW"
+        android:padding="10dp"
+        android:text="JackLogger.w"
+        android:textSize="14sp"></Button>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:onClick="logJson"
+        android:padding="10dp"
+        android:text="JackLogger.json"
+        android:textSize="14sp"></Button>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:onClick="logXml"
+        android:padding="10dp"
+        android:text="JackLogger.xml"
+        android:textSize="14sp"></Button>
+
+</LinearLayout>
