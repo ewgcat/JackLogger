@@ -6,15 +6,15 @@ import androidx.annotation.Nullable;
 import static com.lishuaihua.logger.Utils.checkNotNull;
 
 
-public class AndroidLogAdapter implements LogAdapter {
+public class DiskLogAdapter implements LogAdapter {
 
   @NonNull private final FormatStrategy formatStrategy;
 
-  public AndroidLogAdapter() {
-    this.formatStrategy = PrettyFormatStrategy.newBuilder().build();
+  public DiskLogAdapter() {
+    formatStrategy = CsvFormatStrategy.newBuilder().build();
   }
 
-  public AndroidLogAdapter(@NonNull FormatStrategy formatStrategy) {
+  public DiskLogAdapter(@NonNull FormatStrategy formatStrategy) {
     this.formatStrategy = checkNotNull(formatStrategy);
   }
 
@@ -25,5 +25,4 @@ public class AndroidLogAdapter implements LogAdapter {
   @Override public void log(int priority, @Nullable String tag, @NonNull String message) {
     formatStrategy.log(priority, tag, message);
   }
-
 }

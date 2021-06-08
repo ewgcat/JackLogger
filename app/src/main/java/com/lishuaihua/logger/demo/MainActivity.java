@@ -19,28 +19,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logV(View view) {
-        JackLogger.v(TAG, "Verbose");
+        JackLogger.v("Verbose");
     }
 
     public void logD(View view) {
-        JackLogger.d(TAG, "Debug");
+        JackLogger.d("Debug");
     }
 
     public void logI(View view) {
-        JackLogger.i(TAG, "Info");
+        JackLogger.i("Info" );
     }
 
     public void logE(View view) {
-        JackLogger.e(TAG, "ERROR");
+        JackLogger.e("ERROR" );
     }
 
     public void logW(View view) {
-        JackLogger.w(TAG, "Warn");
+        JackLogger.w("Warn" );
     }
 
     public void logJson(View view) {
         String json = "{\"tagValue\":\"满150-15；满300-40\",\"tagType\":2}";
-        JackLogger.json(TAG, json);
+        JackLogger.json( json);
     }
 
     public void logXml(View view) {
@@ -51,6 +51,6 @@ public class MainActivity extends AppCompatActivity {
                 "android:orientation=\"vertical\"\n" +
                 ">\n" +
                 "</LinearLayout>";
-        JackLogger.xml(TAG, xml);
+        JackLogger.xml( xml);
     }
 }

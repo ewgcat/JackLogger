@@ -1,120 +1,101 @@
 package com.lishuaihua.logger;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class JackLogger {
-    public static final String TAG = JackLogger.class.getSimpleName();
+import static com.lishuaihua.logger.Utils.checkNotNull;
 
-    private JackLogger() {
-    }
+public final class JackLogger {
 
-    /**
-     * 设置是否打印Log，默认是进行打印，如果想不打印，通过这个方法，传入false即可（虽然是init方法，但并非一定要调用）
-     * 一般是在Application中进行调用，用于管理全局的Log。在单独的lib中，如果非必要，不需要调用
-     *
-     * @param ifShow 是否打印Log
-     */
-    public static void init(boolean ifShow) {
-        if (!ifShow) {
-            Logger.init().logLevel(LogLevel.NONE);
-        } else {
-            Logger.init();
-        }
-    }
+  public static final int VERBOSE = 2;
+  public static final int DEBUG = 3;
+  public static final int INFO = 4;
+  public static final int WARN = 5;
+  public static final int ERROR = 6;
+  public static final int ASSERT = 7;
 
-    /**
-     * 设置是否打印log并且设置全局TAG,设置了这个TAG之后，你在程序中自定义的TAG将被覆盖（虽然是init方法，但并非一定要调用）
-     * 一般是在Application中进行调用，用于管理全局的Log。在单独的lib中，如果非必要，不需要调用
-     *
-     * @param isShowLog 是否显示Log
-     * @param tag       全局TAG
-     */
-    public static void init(boolean isShowLog, @Nullable String tag) {
-        if (!isShowLog) {
-            Logger.init(tag).logLevel(LogLevel.NONE);
-        } else {
-            Logger.init(tag);
-        }
-    }
+  @NonNull private static Printer printer = new LoggerPrinter();
 
+  private JackLogger() {
+    //no instance
+  }
 
-    public static void v(String msg) {
-        Logger.v(msg);
-    }
+  public static void printer(@NonNull Printer printer) {
+    JackLogger.printer = checkNotNull(printer);
+  }
 
-    public static void v(String tag, String msg) {
-        Logger.t(tag).v(msg);
-    }
+  public static void addLogAdapter(@NonNull LogAdapter adapter) {
+    printer.addAdapter(checkNotNull(adapter));
+  }
 
-    public static void v(Object msg) {
-        Logger.d(msg);
-    }
+  public static void clearLogAdapters() {
+    printer.clearLogAdapters();
+  }
 
-    public static void d(String msg) {
-        Logger.d(msg);
-    }
+  /**
+   * Given tag will be used as tag only once for this method call regardless of the tag that's been
+   * set during initialization. After this invocation, the general tag that's been set will
+   * be used for the subsequent log calls
+   */
+  public static Printer t(@Nullable String tag) {
+    return printer.t(tag);
+  }
 
-    public static void d(String tag, String msg) {
-        Logger.t(tag).d(msg);
-    }
+  /**
+   * General log function that accepts all configurations as parameter
+   */
+  public static void log(int priority, @Nullable String tag, @Nullable String message, @Nullable Throwable throwable) {
+    printer.log(priority, tag, message, throwable);
+  }
 
-    public static void d(Object msg) {
-        Logger.d(msg);
-    }
+  public static void d(@NonNull String message, @Nullable Object... args) {
+    printer.d(message, args);
+  }
 
-    public static void i(Object msg) {
-        Logger.i(TAG, msg);
-    }
+  public static void d(@Nullable Object object) {
+    printer.d(object);
+  }
 
-    public static void i(String tag, String msg) {
-        Logger.t(tag).i(msg);
-    }
+  public static void e(@NonNull String message, @Nullable Object... args) {
+    printer.e(null, message, args);
+  }
 
-    public static void w(String msg) {
-        Logger.w(msg);
-    }
+  public static void e(@Nullable Throwable throwable, @NonNull String message, @Nullable Object... args) {
+    printer.e(throwable, message, args);
+  }
 
-    public static void w(String tag, String msg) {
-        Logger.t(tag).w(msg);
-    }
+  public static void i(@NonNull String message, @Nullable Object... args) {
+    printer.i(message, args);
+  }
 
+  public static void v(@NonNull String message, @Nullable Object... args) {
+    printer.v(message, args);
+  }
 
-    public static void e(String msg) {
-        Logger.e(msg);
-    }
+  public static void w(@NonNull String message, @Nullable Object... args) {
+    printer.w(message, args);
+  }
 
-    public static void e(Object msg) {
-        Logger.d(msg);
-    }
+  /**
+   * Tip: Use this for exceptional situations to log
+   * ie: Unexpected errors etc
+   */
+  public static void wtf(@NonNull String message, @Nullable Object... args) {
+    printer.wtf(message, args);
+  }
 
-    public static void e(String tag, String msg) {
-        Logger.t(tag).e(msg);
-    }
+  /**
+   * Formats the given json content and print it
+   */
+  public static void json(@Nullable String json) {
+    printer.json(json);
+  }
 
+  /**
+   * Formats the given xml content and print it
+   */
+  public static void xml(@Nullable String xml) {
+    printer.xml(xml);
+  }
 
-    /**
-     * 打印Json格式的数据
-     *
-     * @param jsonFormat Json数据
-     */
-    public static void json(String jsonFormat) {
-        Logger.json(jsonFormat);
-    }
-
-    public static void json(String tag, String jsonFormat) {
-        Logger.t(tag).json(jsonFormat);
-    }
-
-    /**
-     * 打印Json格式的数据
-     *
-     * @param xml xml数据
-     */
-    public static void xml(String xml) {
-        Logger.xml(xml);
-    }
-
-    public static void xml(String tag, String xml) {
-        Logger.t(tag).xml(xml);
-    }
 }
